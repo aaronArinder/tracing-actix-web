@@ -215,6 +215,10 @@ pub mod private {
     pub fn get_request_id(request: &ServiceRequest) -> RequestId {
         use actix_web::HttpMessage;
 
-        request.extensions().get::<RequestId>().cloned().unwrap()
+        request
+            .extensions()
+            .get::<RequestId>()
+            .cloned()
+            .unwrap_or(generate_request_id())
     }
 }
